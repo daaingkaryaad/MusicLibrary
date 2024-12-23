@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args) {
 
-        Singer singer1 = new Singer("The Beatles");
-        Song song1 = new Song("Hey Jude", singer1.getName(), 7.08);
-        Song song2 = new Song("Let It Be", singer1.getName(), 4.03);
+        Singer singer1 = new Singer("Charli xcx");
+        Song song1 = new Song("Guess", singer1.getName(), 2.23);
+        Song song2 = new Song("365", singer1.getName(), 3.23);
 
 
         Playlist playlist = new Playlist("My Favorite Songs");
