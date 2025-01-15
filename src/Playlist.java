@@ -1,14 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Playlist {
-    private final String name;
-    private final List<Song> songs;
-
-    public Playlist() {
-        this.name = "";
-        this.songs = new ArrayList<>();
-    }
+    private String name;
+    private List<Song> songs;
 
     public Playlist(String name) {
         this.name = name;
@@ -19,26 +14,30 @@ public class Playlist {
         songs.add(song);
     }
 
-    public List<Song> getSongs() {
-        return songs;
+    public List<Song> filterByTitle(String partOfTitle) {
+        return songs.stream()
+                .filter(song -> song.getTitle().contains(partOfTitle))
+                .collect(Collectors.toList());
     }
 
-    public int getSongCount() {
-        return songs.size();
+    public List<Song> searchByArtist(String artist) {
+        return songs.stream()
+                .filter(song -> song.getArtist().equals(artist))
+                .collect(Collectors.toList());
+    }
+
+    public void sortByDuration() {
+        songs.sort(Comparator.comparingDouble(Song::getDuration));
+    }
+
+    public List<String> getSongTitles() {
+        return songs.stream()
+                .map(Song::getTitle)
+                .collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
-        if (songs.isEmpty()) {
-            return "Playlist: " + name + ", No songs available";
-        }
-        StringBuilder songTitles = new StringBuilder();
-        for (int i = 0; i < songs.size(); i++) {
-            songTitles.append(songs.get(i).getTitle());
-            if (i < songs.size() - 1) {
-                songTitles.append(", ");
-            }
-        }
-        return "Playlist: " + name + ", Songs: " + songTitles.toString();
+        return "Playlist: " + name + ", Songs: " + getSongTitles();
     }
 }

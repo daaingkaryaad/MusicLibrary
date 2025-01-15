@@ -1,21 +1,23 @@
 public class Main {
     public static void main(String[] args) {
-        Singer singer1 = new Singer("Charli xcx");
-        Song song1 = new Song("Guess", singer1, 2.23);
-        Song song2 = new Song("365", singer1, 3.23);
+        Song solistSong1 = new SolistSong("Make a wish", 2.22, "Bayymack");
+        Song solistSong2 = new SolistSong("Strangers", 5.44, "Ethel Cain");
+        Song bandSong1 = new BandSong("We are the people", 4.27, "Empire Of The Sun");
+        Song bandSong2 = new BandSong("Something in the way", 3.52, "Nirvana");
 
-        Playlist playlist = new Playlist("My Favorite Songs");
-        playlist.addSong(song1);
-        playlist.addSong(song2);
 
-        System.out.println(song1);
-        System.out.println(song2);
-        System.out.println(playlist);
+        Playlist playlist = new Playlist("My Playlist");
+        playlist.addSong(solistSong1);
+        playlist.addSong(solistSong2);
+        playlist.addSong(bandSong1);
+        playlist.addSong(bandSong2);
 
-        if (song1.equals(song2)) {
-            System.out.println("The songs are the same.");
-        } else {
-            System.out.println("The songs are different.");
-        }
+
+        System.out.println("Filtered songs by title 'Strangers': " + playlist.filterByTitle("Strangers"));
+        System.out.println("Songs by 'Ethel Cain': " + playlist.searchByArtist("Ethel Cain"));
+
+
+        playlist.sortByDuration();
+        System.out.println("Playlist after sorting by duration: " + playlist);
     }
 }
